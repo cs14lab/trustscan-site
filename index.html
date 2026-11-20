@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TrustScan — Security scans that run in your own GitHub Actions</title>
+<meta name="description" content="TrustScan checks every pull request, push and nightly build with static analysis, supply chain analysis and a code graph, and brings every finding into one dashboard.">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="review-bar">Design preview for approval — not the live product. Sign-in is not connected.
+  <a href="login.html">Sign-in page</a> <a href="login.html#not-invited">“Not invited” state</a></div>
+
+<header class="nav">
+  <div class="page">
+    <a class="brand" href="#top" aria-label="TrustScan home">
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6366f1"/><stop offset=".55" stop-color="#8b5cf6"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs><path d="M16 2.5 4.5 6.6v8.6c0 7.3 4.9 12.6 11.5 14.3 6.6-1.7 11.5-7 11.5-14.3V6.6L16 2.5Z" fill="url(#lg)"/><path d="m10.6 15.9 3.7 3.7 7.2-7.6" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="brand-word">TrustScan</span>
+    </a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#pipelines">Product</a>
+      <a href="#how">How it works</a>
+      <a href="#security">Security</a>
+      <a href="#engines">Engines</a>
+      <a href="#data">Your data</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost btn-sm hide-sm" href="login.html#request">Request access</a>
+      <a class="btn btn-primary btn-sm" href="login.html">Sign in</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ── Hero ─────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="glow"></div><div class="grid-lines"></div>
+  <div class="page">
+    <div>
+      <span class="eyebrow"><span class="dot"></span>Application security for GitHub teams</span>
+      <h1>Security scans that run in <span class="accent">your own GitHub&nbsp;Actions</span></h1>
+      <p class="lede">TrustScan checks every pull request, push and nightly build with static analysis, supply chain analysis and a code graph that traces untrusted input to dangerous calls. Every finding lands in one dashboard.</p>
+      <div class="hero-cta">
+        <a class="btn btn-google btn-lg" href="login.html">
+          <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+          Sign in with Google
+        </a>
+        <a class="btn btn-ghost btn-lg" href="#how">See how it works</a>
+      </div>
+      <p class="hero-note">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+        Invite-only. Your organisation's admin adds you, then you sign in with Google.
+      </p>
+    </div>
+
+    <div class="mock" aria-label="Illustration of a TrustScan pull-request check">
+      <div class="mock-card">
+        <div class="mock-head"><span class="mock-dots"><i></i><i></i><i></i></span>Pull request #128 · feature/export → main</div>
+        <div class="mock-body">
+          <div class="check">
+            <div class="check-icon">✕</div>
+            <div>
+              <div class="check-title">TrustScan — 1 new finding at high or above</div>
+              <div class="check-sub">3 findings already on main are not counted</div>
+            </div>
+          </div>
+          <div class="finding">
+            <div class="finding-top">
+              <span class="sev">HIGH</span>
+              <span class="finding-name">SQL injection</span>
+              <span class="finding-loc">app/reports.py:42</span>
+            </div>
+            <ol class="trace">
+              <li>request.args["q"] <span class="lbl">untrusted input</span></li>
+              <li>build_filter(q) <span class="lbl">services/filters.py:17</span></li>
+              <li class="sink">cursor.execute(sql) <span class="lbl">database call</span></li>
+            </ol>
+          </div>
+          <div class="runs">
+            <div class="run"><b><i style="background:var(--pipe-static)"></i>Static analysis</b><span>Completed</span></div>
+            <div class="run"><b><i style="background:var(--pipe-supply)"></i>Supply chain</b><span>Completed</span></div>
+            <div class="run"><b><i style="background:var(--pipe-graph)"></i>Code graph</b><span>Completed</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="mock-float"><span class="ok">✓</span><div><b>Ran in your Actions</b><br><span style="color:var(--text-muted)">GitHub-hosted runner · results sealed</span></div></div>
+      <p class="mock-caption">Illustration</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Pipelines ────────────────────────────────────────────────────── -->
+<section class="section" id="pipelines">
+  <div class="page">
+    <div class="head">
+      <div class="kicker">Three pipelines, one commit</div>
+      <h2>Code, dependencies and data flows, checked together</h2>
+      <p class="sub">Run one pipeline or all three on the same commit. Results are combined and de-duplicated, so a problem two engines report shows up once.</p>
+    </div>
+    <div class="pipes">
+      <article class="card pipe" style="--c:var(--pipe-static)">
+        <div class="pipe-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7fb4f2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M13.5 4l-3 16"/></svg></div>
+        <h3>Static analysis</h3>
+        <p>Insecure code, committed secrets, misconfigurations and the routes your application exposes.</p>
+        <ul>
+          <li>Up to seven engines, three by default</li>
+          <li>Every finding mapped to its CWE</li>
+          <li>AI review marks false positives, with reasons</li>
+        </ul>
+        <p class="where">Runs on a GitHub-hosted runner in your repository</p>
+      </article>
+      <article class="card pipe" style="--c:var(--pipe-supply)">
+        <div class="pipe-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f0915f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5V8Z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg></div>
+        <h3>Supply chain</h3>
+        <p>Known vulnerabilities in the exact dependency versions you ship, resolved as of the commit's date.</p>
+        <ul>
+          <li>Matched against OSV and NVD</li>
+          <li>Ranked by EPSS and CISA's known-exploited list</li>
+          <li>Reachability: fix what your code actually uses first</li>
+        </ul>
+        <p class="where">Resolution in your Actions · CycloneDX SBOM</p>
+      </article>
+      <article class="card pipe" style="--c:var(--pipe-graph)">
+        <div class="pipe-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3cc597" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.5 6h9M6.3 8.2l4.4 7.6M17.7 8.2l-4.4 7.6"/></svg></div>
+        <h3>Code graph</h3>
+        <p>Every path from untrusted input to a dangerous operation, across functions and files.</p>
+        <ul>
+          <li>SQL, command, file, SSRF, deserialization and more</li>
+          <li>Each candidate path checked by AI</li>
+          <li>Ask questions about your code in plain English</li>
+        </ul>
+        <p class="where">Python, JavaScript, TypeScript, Java, Go, PHP, C#, Ruby</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ── How it works ─────────────────────────────────────────────────── -->
+<section class="section alt" id="how">
+  <div class="page">
+    <div class="head center">
+      <div class="kicker">How it works</div>
+      <h2>Connected in minutes, controlled from one dashboard</h2>
+      <p class="sub">You decide when scans run. The work happens on GitHub's runners in your repository, and the results come back to TrustScan.</p>
+    </div>
+    <div class="steps">
+      <div class="card step"><h3>Connect GitHub</h3><p>Install the TrustScan app on your account or organisation and choose the repositories it may scan.</p></div>
+      <div class="card step"><h3>Choose when to scan</h3><p>On demand, on every pull request, on every push, or nightly at the hour you pick.</p></div>
+      <div class="card step"><h3>Scans run in your Actions</h3><p>One small managed workflow file starts each scan on a GitHub-hosted runner. Your code is read there.</p></div>
+      <div class="card step"><h3>Review in one place</h3><p>De-duplicated findings, triage that later scans respect, branch comparison and exports.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Security ─────────────────────────────────────────────────────── -->
+<section class="section" id="security">
+  <div class="page sec-grid">
+    <div>
+      <div class="kicker">Security of the scan flow</div>
+      <h2>Only a scan TrustScan started can run</h2>
+      <p class="sub" style="margin-bottom:32px">The workflow file in your repository carries no secrets and no logic. Each run has to prove who it is before it gets anything.</p>
+      <ol class="flow">
+        <li><span class="n">1</span><div><h4>A one-time ticket<span class="who">TrustScan</span></h4><p>Every scan you start or schedule carries a random ticket, used once and bound to the first run that redeems it.</p></div></li>
+        <li><span class="n">2</span><div><h4>GitHub's signed identity<span class="who">GitHub</span></h4><p>The run presents GitHub's signed token: which repository, which workflow, what started it, and that the runner is GitHub-hosted.</p></div></li>
+        <li class="gate"><span class="n">3</span><div><h4>Checked, then released<span class="who">TrustScan</span></h4><p>Only when every check passes does the run receive the key to TrustScan's encrypted, signed engine.</p></div></li>
+        <li><span class="n">4</span><div><h4>Sealed results<span class="who">Your runner</span></h4><p>Results are encrypted to TrustScan's key before upload, and accepted only from the run the ticket was bound to.</p></div></li>
+      </ol>
+    </div>
+    <div>
+      <div class="card blocked">
+        <h3>What happens if someone tries</h3>
+        <table>
+          <tr><td>Clicks “Run workflow” in the Actions tab</td><td><span class="tag-x">Stops</span> at step one</td></tr>
+          <tr><td>Copies the workflow into another repository</td><td><span class="tag-x">Refused</span></td></tr>
+          <tr><td>Reuses a ticket from an earlier scan</td><td><span class="tag-x">Refused</span></td></tr>
+          <tr><td>Runs it on a self-hosted runner</td><td><span class="tag-x">Refused</span></td></tr>
+          <tr><td>Downloads the scan's artifacts</td><td>Ciphertext only</td></tr>
+          <tr><td>Uploads made-up results</td><td><span class="tag-x">Ignored</span></td></tr>
+        </table>
+      </div>
+      <div class="card" style="margin-top:20px">
+        <h3>The platform</h3>
+        <p>Invite-only Google sign-in. Organisations with admin, member and viewer roles. Sessions stored as hashes and never put in URLs. A strict Content Security Policy on every page.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Features ─────────────────────────────────────────────────────── -->
+<section class="section alt" id="features">
+  <div class="page">
+    <div class="head">
+      <div class="kicker">Built for the way teams ship</div>
+      <h2>From the pull request to the audit trail</h2>
+    </div>
+    <div class="features">
+      <article class="card feature"><div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a5b4fc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M6 8.5v7M18 15.5V9a3 3 0 0 0-3-3h-4"/><path d="m13 4-2 2 2 2"/></svg></div><h3>Pull-request checks</h3><p>A TrustScan check on every pull request that fails only on findings the change adds, at the severity you choose.</p></article>
+      <article class="card feature"><div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a5b4fc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></div><h3>Findings tracked across scans</h3><p>New, still open or fixed: each finding keeps its identity, and a person's decision is never overwritten by a later scan.</p></article>
+      <article class="card feature"><div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a5b4fc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div><h3>Governed exceptions</h3><p>Accepting a risk needs a reason and a VEX justification, a second approver for high and critical, and it always expires.</p></article>
+      <article class="card feature"><div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a5b4fc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v12M18 9v12"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="6" r="3"/><path d="M9 18h6a3 3 0 0 0 3-3"/></svg></div><h3>Branch comparison and policy gate</h3><p>See what a branch adds, fixes or leaves unchanged. Each policy rule can block, warn or only report.</p></article>
+      <article class="card feature"><div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a5b4fc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg></div><h3>SBOM and SARIF exports</h3><p>CycloneDX and SPDX 2.3 inventories, and SARIF 2.1.0 for GitHub code scanning and other tools.</p></article>
+      <article class="card feature"><div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a5b4fc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="m8 9 3 3-3 3M13 15h3M9 21h6"/></svg></div><h3>Your editor and AI assistants</h3><p>Connect Claude, Cursor, VS Code and other MCP tools to list findings, check a policy result or start a scan.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ── Engines ──────────────────────────────────────────────────────── -->
+<section class="section" id="engines">
+  <div class="page">
+    <div class="head">
+      <div class="kicker">Engines</div>
+      <h2>Seven engines for static analysis</h2>
+      <p class="sub">Pick the engines per scan. Three run by default.</p>
+    </div>
+    <div class="engines">
+      <div class="engine on"><code>ts-e1</code><span class="def">Default</span><p>Static code analysis</p></div>
+      <div class="engine"><code>ts-e2</code><p>Deep dataflow analysis</p></div>
+      <div class="engine on"><code>ts-e3</code><span class="def">Default</span><p>Secret detection</p></div>
+      <div class="engine on"><code>ts-e4</code><span class="def">Default</span><p>Dependency and configuration</p></div>
+      <div class="engine"><code>ts-e5</code><p>Advisory matching</p></div>
+      <div class="engine"><code>ts-e6</code><p>Component inventory</p></div>
+      <div class="engine"><code>ts-e7</code><p>Attack surface mapping</p></div>
+    </div>
+    <p class="engines-note">ts-e2 runs on public repositories, or private ones whose owner has GitHub Advanced Security.</p>
+  </div>
+</section>
+
+<!-- ── Data ─────────────────────────────────────────────────────────── -->
+<section class="section alt" id="data">
+  <div class="page">
+    <div class="head">
+      <div class="kicker">Your data</div>
+      <h2>Your code stays on the runner unless you choose the code graph</h2>
+      <p class="sub">Only the code graph keeps a copy of your source on TrustScan's servers, and only after an administrator in your organisation accepts a notice that says so.</p>
+    </div>
+    <div class="data">
+      <article class="card" style="--c:var(--pipe-static)"><h3>Static analysis</h3><p>Your code is read on the GitHub-hosted runner. Only encrypted results leave it.</p><p class="k"><b>Kept:</b> findings, with the scan</p></article>
+      <article class="card" style="--c:var(--pipe-supply)"><h3>Supply chain</h3><p>Reads your dependency and lock files. Resolution runs in your Actions, sealed the same way.</p><p class="k"><b>Kept:</b> the resolution artifact, 7 days in your Actions</p></article>
+      <article class="card" style="--c:var(--pipe-graph)"><h3>Code graph</h3><p>A copy of the repository is analysed on TrustScan's servers; parts of the code go to an AI model provider to check findings.</p><p class="k"><b>Kept:</b> copy deleted within 24 hours; graph at most 30 days</p></article>
+    </div>
+    <h3 class="roles-title">Organisations and roles</h3>
+    <div class="roles">
+      <article class="card role"><h3>Admin <span class="pill">Organisation</span></h3><p>Invites people, sets their roles, and accepts the code graph notice for the organisation.</p></article>
+      <article class="card role"><h3>Member <span class="pill">Runs scans</span></h3><p>Starts, schedules and stops scans, triages findings and runs AI review.</p></article>
+      <article class="card role"><h3>Viewer <span class="pill">Read only</span></h3><p>Sees the organisation's scans, findings, SBOMs and reports.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ──────────────────────────────────────────────────────────── -->
+<section class="section" id="access" style="padding-bottom:0">
+  <div class="page">
+    <div class="cta">
+      <h2>Bring TrustScan to your repositories</h2>
+      <p>TrustScan is invite-only. If your organisation already uses it, sign in with the Google account your admin invited. If not, ask us for access.</p>
+      <div class="hero-cta">
+        <a class="btn btn-google btn-lg" href="login.html">
+          <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+          Sign in with Google
+        </a>
+        <a class="btn btn-ghost btn-lg" href="login.html#request">Request access</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="page">
+    <a class="brand" href="#top" style="font-size:1rem">
+      <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2.5 4.5 6.6v8.6c0 7.3 4.9 12.6 11.5 14.3 6.6-1.7 11.5-7 11.5-14.3V6.6L16 2.5Z" fill="#6366f1"/><path d="m10.6 15.9 3.7 3.7 7.2-7.6" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>TrustScan</span>
+    </a>
+    <span>© 2026 TrustScan</span>
+    <nav aria-label="Footer">
+      <a href="#security">Security</a>
+      <a href="#data">Your data</a>
+      <a href="#" title="To be written">Privacy</a>
+      <a href="#" title="To be written">Terms</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
