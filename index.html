@@ -22,6 +22,7 @@
     </a>
     <nav class="nav-links" aria-label="Sections">
       <a href="#pipelines">Product</a>
+      <a href="#standards">Standards</a>
       <a href="#how">How it works</a>
       <a href="#security">Security</a>
       <a href="#engines">Engines</a>
@@ -74,6 +75,7 @@
               <span class="finding-name">SQL injection</span>
               <span class="finding-loc">app/reports.py:42</span>
             </div>
+            <div class="tags"><span class="tag">CWE-89</span><span class="tag">OWASP A03:2021 Injection</span><span class="tag top">CWE Top 25</span></div>
             <ol class="trace">
               <li>request.args["q"] <span class="lbl">untrusted input</span></li>
               <li>build_filter(q) <span class="lbl">services/filters.py:17</span></li>
@@ -139,8 +141,31 @@
   </div>
 </section>
 
+<!-- ── Standards ────────────────────────────────────────────────────── -->
+<section class="section alt" id="standards">
+  <div class="page std-grid">
+    <div>
+      <div class="kicker">Standards</div>
+      <h2>Every finding mapped to OWASP Top 10 and MITRE's CWE</h2>
+      <p class="sub">Whichever pipeline or engine found it, each finding carries its CWE weakness from MITRE's CWE catalog, its OWASP Top 10 category, and whether it is one of MITRE's CWE Top 25 Most Dangerous Software Weaknesses.</p>
+      <div class="std-example" aria-label="Example of how a finding is tagged">
+        <div class="std-row"><span class="std-k">Finding</span><span>SQL injection in app/reports.py</span></div>
+        <div class="std-row"><span class="std-k">Weakness</span><span class="tag">CWE-89</span><span class="std-v">Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')</span></div>
+        <div class="std-row"><span class="std-k">OWASP Top 10</span><span class="tag">A03:2021 Injection</span><span class="tag">A05:2025 Injection</span></div>
+        <div class="std-row"><span class="std-k">MITRE</span><span class="tag top">CWE Top 25</span></div>
+      </div>
+    </div>
+    <div class="std-cards">
+      <article class="card"><h3>OWASP Top 10, both editions</h3><p>Findings are mapped to the 2021 edition and the 2025 release candidate. Filter a scan's findings by category, and get each scan's report broken down category by category.</p></article>
+      <article class="card"><h3>MITRE CWE Top 25</h3><p>See at a glance which findings are among the most dangerous software weaknesses on MITRE's 2025 list, and show only those with one filter.</p></article>
+      <article class="card"><h3>One CWE vocabulary</h3><p>Every engine's results are mapped to CWE from MITRE's catalog, so findings compare across engines and pipelines. Unmapped findings are counted as unmapped, never forced into a category.</p></article>
+      <article class="card"><h3>Policies by category</h3><p>Write gate rules against OWASP categories, for example block any new A03 Injection finding, and export SARIF with each finding's CWE.</p></article>
+    </div>
+  </div>
+</section>
+
 <!-- ── How it works ─────────────────────────────────────────────────── -->
-<section class="section alt" id="how">
+<section class="section" id="how">
   <div class="page">
     <div class="head center">
       <div class="kicker">How it works</div>

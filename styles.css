@@ -178,6 +178,21 @@ section { position: relative; }
 .card h3 { margin: 0 0 8px; font-size: 1.12rem; letter-spacing: -0.01em; }
 .card p { margin: 0; color: var(--text-secondary); font-size: 0.95rem; }
 
+/* Finding tags */
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.tag { font-size: 0.72rem; font-weight: 650; padding: 3px 8px; border-radius: 6px; background: rgba(148, 163, 184, 0.1); border: 1px solid var(--border-strong); color: #cbd5e1; white-space: nowrap; }
+.tag.top { background: rgba(99, 102, 241, 0.14); border-color: rgba(99, 102, 241, 0.45); color: #c7d2fe; }
+
+/* Standards */
+.std-grid { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 48px; align-items: start; }
+.std-example { margin-top: 28px; padding: 18px 20px; border-radius: var(--radius); background: rgba(10, 10, 15, 0.6); border: 1px solid var(--border-strong); }
+.std-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 9px 0; font-size: 0.9rem; }
+.std-row + .std-row { border-top: 1px solid var(--border); }
+.std-k { width: 112px; flex: none; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
+.std-v { flex-basis: 100%; padding-left: 120px; font-size: 0.8rem; color: var(--text-secondary); }
+.std-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.std-cards .card { padding: 22px; }
+
 /* Pipelines */
 .pipes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .pipe { position: relative; overflow: hidden; }
@@ -299,7 +314,7 @@ section { position: relative; }
   .mock-float { margin-left: 0; }
   .pipes, .features, .data, .roles { grid-template-columns: 1fr 1fr; }
   .steps { grid-template-columns: 1fr 1fr; }
-  .sec-grid { grid-template-columns: 1fr; gap: 32px; }
+  .sec-grid, .std-grid { grid-template-columns: 1fr; gap: 32px; }
 }
 @media (max-width: 760px) {
   .nav-links { display: none; }
@@ -308,6 +323,9 @@ section { position: relative; }
   .pipes, .features, .data, .roles, .steps { grid-template-columns: 1fr; }
   .engines { grid-template-columns: 1fr 1fr; }
   .runs { grid-template-columns: 1fr; }
+  .std-cards { grid-template-columns: 1fr; }
+  .std-k { width: 100%; }
+  .std-v { padding-left: 0; }
   .finding-loc { margin-left: 0; width: 100%; }
   .blocked td:last-child { white-space: normal; }
   .footer nav { margin-left: 0; }
